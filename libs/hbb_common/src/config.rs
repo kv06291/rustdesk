@@ -77,7 +77,7 @@ lazy_static::lazy_static! {
         map.insert("password".to_string(), option_env!("HARD_SETTINGS_S"). {
     Some(key) if !key.is_empty() => key,
     _ => "",
-    }.to_owned());
+    }.to_string());
         RwLock::new(map)
     };
     pub static ref BUILTIN_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
