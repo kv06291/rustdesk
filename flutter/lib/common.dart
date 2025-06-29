@@ -59,7 +59,10 @@ final isWebOnMacOs = isWebOnMacOS_;
 var isMobile = isAndroid || isIOS;
 var version = '';
 int androidVersion = 0;
-
+final bool isIncomingOnly_EN = false;
+final bool isDisableSettings_EN = false;
+//final bool isIncomingOnly_EN = true;
+//final bool isDisableSettings_EN = true;
 // Only used on Linux.
 // `windowManager.setResizable(false)` will reset the window size to the default size on Linux.
 // https://stackoverflow.com/questions/8193613/gtk-window-resize-disable-without-going-back-to-default
@@ -1695,7 +1698,7 @@ class LastWindowPosition {
 
 String get windowFramePrefix =>
     kWindowPrefix +
-    (bind.isIncomingOnly()
+    (isIncomingOnly_EN
         ? "incoming_"
         : (bind.isOutgoingOnly() ? "outgoing_" : ""));
 
@@ -1721,13 +1724,13 @@ Future<void> saveWindowPosition(WindowType type, {int? windowId}) async {
 
   switch (type) {
     case WindowType.Main:
-      // Checking `bind.isIncomingOnly()` is a simple workaround for MacOS.
+      // Checking `isIncomingOnly_EN` is a simple workaround for MacOS.
       // `await windowManager.isMaximized()` will always return true
       // if is not resizable. The reason is unknown.
       //
-      // `setResizable(!bind.isIncomingOnly());` in main.dart
+      // `setResizable(!isIncomingOnly_EN);` in main.dart
       isMaximized =
-          bind.isIncomingOnly() ? false : await windowManager.isMaximized();
+          isIncomingOnly_EN ? false : await windowManager.isMaximized();
       if (isFullscreen || isMaximized) {
         setPreFrame();
       } else {
@@ -1986,11 +1989,11 @@ Future<bool> restoreWindowPosition(WindowType type,
       }
       if (lpos.isMaximized == true) {
         await restorePos();
-        if (!(bind.isIncomingOnly() || bind.isOutgoingOnly())) {
+        if (!(isIncomingOnly_EN || bind.isOutgoingOnly())) {
           await windowManager.maximize();
         }
       } else {
-        final storeSize = !bind.isIncomingOnly() || bind.isOutgoingOnly();
+        final storeSize = !isIncomingOnly_EN || bind.isOutgoingOnly();
         if (isWindows) {
           if (storeSize) {
             // We need to set the window size first to avoid the incorrect size in some special cases.
