@@ -70,9 +70,9 @@ lazy_static::lazy_static! {
     pub static ref OVERWRITE_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
 	pub static ref HARD_SETTINGS: RwLock<HashMap<String, String>> = {
         let mut map = HashMap::new();
-        map.insert("password".to_string(), match option_env!("password"){Some(key) if !key.is_empty() => key, _ => "",}.to_string());//固定密码
-		map.insert("conn-type".to_string(), match option_env!("conn_type"){Some(key) if !key.is_empty() => key, _ => "",}.to_string());//客户端"incoming"  "outgoing" 
-        map.insert("disable-settings".to_string(), match option_env!("disable_settings"){Some(key) if !key.is_empty() => key, _ => "",}.to_string()); //关闭设置 Y
+        map.insert("password".to_string(), match option_env!("PASSWORD"){Some(key) if !key.is_empty() => key, _ => "",}.to_string());//固定密码
+		map.insert("conn-type".to_string(), match option_env!("CONN_TYPE"){Some(key) if !key.is_empty() => key, _ => "",}.to_string());//客户端"incoming"  "outgoing" 
+        map.insert("disable-settings".to_string(), match option_env!("DISABLE_SETTINGS"){Some(key) if !key.is_empty() => key, _ => "",}.to_string()); //关闭设置 Y
         RwLock::new(map)
     };
     pub static ref BUILTIN_SETTINGS: RwLock<HashMap<String, String>> = Default::default();

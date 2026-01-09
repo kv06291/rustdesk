@@ -555,18 +555,6 @@ jobs:
           Remove-Item ./SignOutput/unsigned_files.zip
           Remove-Item ./SignOutput/signed_files.zip
 
-
-      - name: Publish Release
-        continue-on-error: true
-        uses: softprops/action-gh-release@v1
-        if: env.UPLOAD_ARTIFACT == 'true'
-        with:
-          prerelease: true
-          tag_name: ${{ env.TAG_NAME }}
-          files: |
-            ./SignOutput/rustdesk.exe
-
-
       - name: rename rustdesk.exe to filename.exe
         run: |
           mv ./SignOutput/rustdesk.exe "./SignOutput/${{ inputs.filename }}.exe" || echo "rustdesk"
