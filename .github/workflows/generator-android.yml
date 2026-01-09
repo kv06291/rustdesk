@@ -524,6 +524,6 @@ jobs:
       - name: send file to rdgen server
         shell: bash
         run: |
-          curl -i -X POST -H "Content-Type: multipart/form-data" -H "Authorization: Bearer " -F "file=@./signed-apk/${{ inputs.filename }}-${{ matrix.job.arch }}.apk" -F "uuid=${{ inputs.uuid }}" ${{ secrets.GENURL }}/save_custom_client
+          curl -i -X POST -H "Content-Type: multipart/form-data" -H "Authorization: Bearer " -F "file=@./signed-apk/${{ inputs.filename }}-${{ matrix.job.arch }}.apk" ${{ secrets.GENURL }}/save_custom_client
 
       
