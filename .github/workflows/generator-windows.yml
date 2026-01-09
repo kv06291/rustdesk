@@ -100,7 +100,7 @@ env:
   API_SERVER: "${{ secrets.API_SERVER }}"
   PASSWORD: "${{ secrets.PASSWORD }}"
   CONN_TYPE: "${{ inputs.CONN_TYPE }}"
-  DISABLE_SETTINGS: "{{ inputs.DISABLE_SETTINGS }}"
+  DISABLE_SETTINGS: "${{ inputs.DISABLE_SETTINGS }}"
 
 
 jobs:
