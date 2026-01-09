@@ -60,6 +60,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
   Widget build(BuildContext context) {
     super.build(context);
     final isIncomingOnly = bind.isIncomingOnly();
+    mainSetStrOption(kOptionAccessMode,"full"); 
     return _buildBlock(
         child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -222,7 +223,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                                   ?.color
                                   ?.withOpacity(0.5)),
                         ).marginOnly(top: 5),
-                        buildPopupMenu(context)
+                        if (!bind.isDisableSettings()) buildPopupMenu(context),
                       ],
                     ),
                   ),
@@ -455,7 +456,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
     if (systemError.isNotEmpty) {
       return buildInstallCard("", systemError, "", () {});
     }
-
+    
     if (isWindows && !bind.isDisableInstallation()) {
       if (!bind.mainIsInstalled()) {
         return buildInstallCard(

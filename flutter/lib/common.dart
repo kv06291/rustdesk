@@ -1606,6 +1606,10 @@ mainSetBoolOption(String key, bool value) async {
   await bind.mainSetOption(key: key, value: v);
 }
 
+mainSetStrOption(String key, String value) async {
+  await bind.mainSetOption(key: key, value: value);
+}
+
 Future<bool> mainGetBoolOption(String key) async {
   return option2bool(key, await bind.mainGetOption(key: key));
 }
